@@ -1,3 +1,8 @@
 'use strict'
 
-100+200
+process.nextTick(function()
+{
+	console.log('nextTick callback!');
+});
+
+console.log('nextTick was set!');
