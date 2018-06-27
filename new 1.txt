@@ -8,3 +8,4 @@ git git
 git git git
 git git git git
 /branch device/
+creating a new branch is quick & simple
