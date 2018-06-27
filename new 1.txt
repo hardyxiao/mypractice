@@ -7,5 +7,12 @@ git is new
 git git
 git git git
 git git git git
+<<<<<<< HEAD
 /branch device/
 creating a new branch is quick & simple
+=======
+/branch feature/
+
+>>>>>>> feature1
+
+creating a new branch is quick and simple
