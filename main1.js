@@ -5,4 +5,5 @@ var greet = require('./new 1');
 
 var s = 'michael';
 
-greet(s);//michael!
+greet.greet(s);//michael!
+greet.hello();
