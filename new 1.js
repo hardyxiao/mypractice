@@ -1,6 +1,6 @@
 'use strict';
 
-console.log(100+200);
+/*console.log(100+200);*/
 
 var s = 'Hello';
 
