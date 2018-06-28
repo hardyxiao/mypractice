@@ -46,7 +46,7 @@ rs.pipe(ws); //数据读完后会自动关闭write流
 */
 
 /*
-//http模块
+//http服务器
 //http模块
 
 
@@ -73,3 +73,61 @@ server.listen(8080);
 
 console.log('server is running at http://127.0.0.1:8080/');
 */
+
+
+///*
+//扩展上述HTTP为一个文件服务器
+//设定一个目录，使web程序变成一个文件服务器
+//we need to analysis the path of request.url,then find the corresponding file,finally send the file
+
+var fs = require('fs');
+var	url = require('url');
+var path = require('path');
+var http = require('http');
+
+//从命令行参数获取root目录，默认目录为当前目录
+var root = path.resolve(process.argv[2] || '.');
+
+console.log('static root dir:' + root);
+
+//创建服务器
+var server = http.createServer(function(request, response)
+{
+	//获取/解析 url的path，如：‘css/bootstrap.css’
+	var pathname = url.parse(request.url).pathname;
+	
+	//获取对应的本地文件路径
+	var filepath = path.join(root,pathname);
+	
+	//获取文件状态
+	fs.stat(filepath,function(err,stats)
+	{
+	   if(!err && stats.isFile()){
+		   //没有出错且文件存在
+		   console.log('200'+request.url);
+		   
+		   //发送200响应
+		   response.writeHead(200);
+		   
+		   //将文件流导向response:
+		   fs.createReadStream(filepath).pipe(response);
+	   }	else{
+		   //出错了或文件不存在
+		   console.log('404' + request.url);
+		   //发送404响应
+		   response.writeHead(404);
+		   response.end('404 not found');
+		   
+	   }
+	}
+	);
+}
+);
+
+//监听8080
+server.listen(8080);
+
+console.log('sever is running at http://127.0.0.1:8080/');
+	
+
+//*/
